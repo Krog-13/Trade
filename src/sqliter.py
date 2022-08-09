@@ -1,9 +1,8 @@
 import psycopg2
-from psycopg2.extras import RealDictCursor
+from psycopg2.extras import execute_values
+
 import config
-import logging
 import sql
-from datetime import datetime
 
 
 class Database:
@@ -27,10 +26,10 @@ class Database:
                     dbname=self.dbname
                 )
             except psycopg2.DatabaseError as e:
-                logging.debug(e)
+                config.logging.debug(e)
                 raise e
             finally:
-                logging.info('Connection opened successfully')
+                config.logging.info('Connection opened successfully')
 
     def check_exists(self, vars=None):
         """Run SQL query to select rows from table"""
@@ -42,7 +41,7 @@ class Database:
             return record
 
     def update(self, vars=None):
-        """Run SQL query to select rows from table"""
+        """Run SQL query to update rows from table"""
         self.connect()
         with self.conn.cursor() as cur:
             cur.execute(sql.query_update, vars=vars)
@@ -51,19 +50,26 @@ class Database:
             return f"{cur.rowcount} rows affected"
 
     def add(self, vars=None):
-        """Run SQL query to select rows from table"""
+        """Run SQL query to add rows from table"""
         self.connect()
         with self.conn.cursor() as cur:
             cur.execute(sql.query_add, vars=vars)
             self.conn.commit()
             cur.close()
 
+    def first_add(self, vars=None):
+        """Run SQL query to add rows from table"""
+        self.connect()
+        with self.conn.cursor() as cur:
+            execute_values(cur, sql.query_add, vars)
+            self.conn.commit()
+            cur.close()
+
     def close(self):
         self.conn.close()
 
-
 if __name__ == '__main__':
-    d = Database()
-
-    added = (1,1111,45000,datetime.now(),45666)
-    d.add(vars=added)
+    db = Database()
+    res = db.check_exists(vars=(1,))
+    res1 = db.check_exists(vars=(1,))
+    # print(res)

@@ -3,3 +3,5 @@ README.md
 .idea
 __pycache__/
 credential.json
+src/test.py
+

@@ -1,7 +1,7 @@
 from datetime import datetime
 import requests
 import xml.etree.ElementTree as ET
-from config import TOKEN, chatID
+from config import TOKEN, chatID, logging
 
 
 def reformat_date(data, rate_us):
@@ -40,8 +40,9 @@ def cbr():
 def notification_tg(date):
     now = datetime.now().date()
     note = "Срок поставки прошел"
-    if date > now:
+    if date < now:
         return
+    logging.info("Send notification")
     send_text = 'https://api.telegram.org/bot' + TOKEN + \
                '/sendMessage?chat_id=' + chatID + \
                '&parse_mode=Markdown&text=' + note

@@ -4,6 +4,7 @@ from sqliter import Database
 from recast import manipulation_sheets
 import schedule
 from utils import cbr
+from config import logging
 
 # initialisations
 db = Database()
@@ -13,24 +14,34 @@ RATE_US = cbr()
 # us to rus exchange rate
 def rate():
     global RATE_US
-    RATE_US = cbr()
+    try:
+        RATE_US = cbr()
+    except ConnectionError:
+        pass
 
 
 def start():
     """Main scheduling"""
+    logging.info('Start')
     new_date = data_sheet()
-    manipulation_sheets(db, new_date, RATE_US)
+    try:
+        manipulation_sheets(db, new_date, RATE_US)
+    except LookupError as e:
+        logging.warning(e)
+    logging.info('Complete')
 
 
 # Task scheduling
 schedule.every().day.at("00:00").do(rate)
-schedule.every(10).minutes.do(start)
+schedule.every(1).minutes.do(start)
 
 
 def main():
-    schedule.run_pending()
-    time.sleep(1)
+    logging.info("Loop starting...")
+    while True:
+        schedule.run_pending()
+        time.sleep(1)
 
 
 if __name__ == '__main__':
-    start()
+    main()

@@ -1,5 +1,10 @@
 from os import environ, path
 from dotenv import load_dotenv
+import logging
+
+logging.basicConfig(level=logging.INFO)
+
+
 # Load variables from .env
 basedir = path.abspath(path.dirname(__file__))
 load_dotenv(path.join(basedir, '.env'))
@@ -11,9 +16,8 @@ SERVICE_ACCOUNT_FILE = 'credential.json'
 SAMPLE_SPREADSHEET_ID = '12XUt8fPdoWSCGbsDBaeTnurMZPFB_0Ju_GH_D4Lk13k'
 SAMPLE_RANGE_NAME = 'A1:D'
 TOKEN = environ.get('TOKEN')
-# chatID = '838019137'
-chatID = '1777396859'
-
+chatID = '838019137'
+# chatID = '1777396859'
 
 # Database config
 DATABASE_HOST = environ.get('DATABASE_HOST')

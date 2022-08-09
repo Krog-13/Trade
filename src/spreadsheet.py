@@ -1,4 +1,3 @@
-from pprint import pprint
 from google.oauth2 import service_account
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
@@ -6,6 +5,7 @@ from config import *
 
 
 def data_sheet():
+    logging.info("Start reading from google sheets")
     credentials = service_account.Credentials.from_service_account_file(
         SERVICE_ACCOUNT_FILE, scopes=SCOPES)
 
@@ -19,7 +19,7 @@ def data_sheet():
         # pprint(result['values'])
         return result.get('values', [])
     except HttpError as err:
-        print(err)
+        logging.info(err)
 
 
 

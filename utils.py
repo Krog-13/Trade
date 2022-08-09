@@ -1,13 +1,14 @@
 from datetime import datetime
 import requests
 import xml.etree.ElementTree as ET
-
-
+from config import TOKEN, chatID
 
 
 def reformat_date(data, rate_us):
     """Datetime change format"""
     data[3] = datetime.strptime(data[3], "%d.%m.%Y").date()
+    # send notification
+    notification_tg(data[3])
     data.append(round(int(data[2])*rate_us,2))
     return data
 
@@ -36,7 +37,22 @@ def cbr():
         return float(result)
 
 
+def notification_tg(date):
+    now = datetime.now().date()
+    note = "Срок поставки прошел"
+    if date > now:
+        return
+    send_text = 'https://api.telegram.org/bot' + TOKEN + \
+               '/sendMessage?chat_id=' + chatID + \
+               '&parse_mode=Markdown&text=' + note
+
+    requests.get(send_text)
+    # return response.json()
+
+
+
 if __name__ == '__main__':
-    res = ['11', '12497899', '617', '30.10.2022']
+    res = ['11', '12497899', '617', '30.07.2022']
     reformat_date(res, 60)
+    pass
 

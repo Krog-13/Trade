@@ -2,7 +2,7 @@ import psycopg2
 from psycopg2.extras import execute_values
 
 import config
-import sql
+from src import sql
 
 
 class Database:

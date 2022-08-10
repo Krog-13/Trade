@@ -7,8 +7,6 @@ from config import TOKEN, chatID, logging
 def reformat_date(data, rate_us):
     """Datetime change format"""
     data[3] = datetime.strptime(data[3], "%d.%m.%Y").date()
-    # send notification
-    notification_tg(data[3])
     data.append(round(int(data[2])*rate_us,2))
     return data
 

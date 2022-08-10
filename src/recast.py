@@ -1,4 +1,4 @@
-import utils
+from src import utils
 
 
 def manipulation_sheets(db, sheet, rate_us):
@@ -13,5 +13,7 @@ def manipulation_sheets(db, sheet, rate_us):
             db.update(vars=tuple(row[1:]+row[:1]))
         else:
             data = utils.reformat_date(row, rate_us)
+            # send notification
+            utils.notification_tg(row[3])
             # add new data
             db.add(vars=tuple(data))

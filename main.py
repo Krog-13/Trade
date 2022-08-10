@@ -1,9 +1,9 @@
 import time
-from spreadsheet import data_sheet
-from sqliter import Database
-from recast import manipulation_sheets
+from src.spreadsheet import data_sheet
+from src.sqliter import Database
+from src.recast import manipulation_sheets
 import schedule
-from utils import cbr
+from src.utils import cbr
 from config import logging
 
 # initialisations

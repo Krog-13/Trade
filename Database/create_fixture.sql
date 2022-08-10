@@ -1,0 +1,7 @@
+CREATE TABLE IF NOT EXISTS deliver
+(id serial PRIMARY KEY,
+ num INTEGER NOT NULL UNIQUE,
+ order_num INTEGER NOT NULL,
+ price_us INTEGER NOT NULL,
+ delivery_time DATE NOT NULL DEFAULT NOW(),
+ price_rus INTEGER)

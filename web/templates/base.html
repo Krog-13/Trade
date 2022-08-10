@@ -1,0 +1,43 @@
+{% extends 'bootstrap/base.html' %}
+
+{% block title %}
+    {% if title %}{{ title }} - Rating{% else %}{{('Welcome to Web') }}{% endif %}
+{% endblock %}
+
+{% block navbar %}
+<nav class="navbar navbar-default">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                </button>
+            </div>
+        </div>
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li><a href="#">Каналсервис</a></li>
+                    <li><a href="#">Web Falsk</a></li>
+                </ul>
+            </div>
+    </nav>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        {% block app_content %}{% endblock %}
+    </div>
+
+    {% block footer %}
+        <div class="footer">
+            <footer class="text-center text-lg-start text-white" style="background-color: #929fba">
+                <div style="padding: 10px">
+                  <!-- Copyright -->
+                  <div class="footer-copysright text-center text-white">© 2022 Copyright:
+                    <a href="https://www.instagram.com/arman_nu_95" target="_blank">Instagram</a>
+                  </div>
+                  <!-- Copyright -->
+                </div>
+            </footer>
+        </div>
+    {% endblock %}
+{% endblock %}

@@ -1,0 +1,40 @@
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+tr, td {
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #D6EEEE;
+}
+
+.a1 {
+font-family: Verdana;
+font-weight: bold
+font-size: 12pt; /* Размер шрифта в пунктах */
+}
+
+.a3 {
+font-size: 24pt;
+text-align: center;
+}
+
+.b3 {
+font-size: 14pt;
+text-align: center;
+
+}
+
+
+.a2 {
+  width: 150px;
+  border-collapse: collapse;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0,0,0,0.1);
+  position: relative;
+  left: 87%;
+}

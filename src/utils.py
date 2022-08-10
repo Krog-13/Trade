@@ -10,17 +10,17 @@ def reformat_date(data, rate_us):
     data.append(round(int(data[2])*rate_us,2))
     return data
 
-
-def compare(new_r, old_r, rate_us):
-    new = reformat_date(new_r, rate_us)[1:]
-    new_r = []
+# todo: fix
+def compare(new, old_r, rate_us):
+    new = reformat_date(new, rate_us)[1:]
+    new_row = []
     for i in new:
         if isinstance(i, str):
-            new_r.append(int(i))
+            new_row.append(int(i))
         else:
-            new_r.append(i)
-    for i in range(len(new)):
-        if new_r[i] != old_r[i]:
+            new_row.append(i)
+    for i in range(len(new)-1):
+        if new_row[i] != old_r[i]:
             return False
     return True
 
@@ -51,7 +51,9 @@ def notification_tg(date):
 
 
 if __name__ == '__main__':
-    res = ['11', '12497899', '617', '30.07.2022']
-    reformat_date(res, 60)
-    pass
+    date = datetime(2022,7,30).date()
+    row = ['11','12497899', '617', '30.07.2022']
+    old = [11, 12497899, 617, date, 64000]
+    res = compare(row,old, 60)
+    print(res)
 

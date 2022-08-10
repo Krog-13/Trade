@@ -24,3 +24,5 @@ schedule==1.1.0
 six==1.16.0
 uritemplate==4.1.1
 urllib3==1.26.11
+flask-bootstrap==3.3.7.1
+Flask==2.2.2

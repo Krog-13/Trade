@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+{% block styles %}
+{{ super() }}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}" >
+{% endblock%}
+{% block app_content %}
+<div class="container">
+    <div class="a4">
+        <table class="a2">
+            <tr>
+                <td class="b3"><strong>TOTAL</strong></td>
+            </tr>
+            <tr>
+                <td align="center" class="a3">{{ count }}</td>
+            </tr>
+        </table>
+    </div>
+    <br>
+    <br>
+    <table class="table table-hover">
+        <tr style="background-color: #7ee6c7">
+            <td class="a1">№</td>
+            <td class="a1">Заказ</td>
+            <td class="a1">Стоимость $</td>
+            <td class="a1">Срок поставки</td>
+            <td class="a1">Стоимость руб</td>
+        </tr>
+        {% for row in sheets %}
+                {% include '_post.html' %}
+        {% endfor %}
+    </table>
+</div>
+
+
+{% endblock %}

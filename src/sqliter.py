@@ -1,5 +1,5 @@
 import psycopg2
-from psycopg2.extras import execute_values
+from psycopg2.extras import execute_values, RealDictCursor
 
 import config
 from src import sql
@@ -64,6 +64,15 @@ class Database:
             execute_values(cur, sql.query_add, vars)
             self.conn.commit()
             cur.close()
+
+    def get_sheets(self, vars=None):
+        """Run SQL query to add rows from table"""
+        self.connect()
+        with self.conn.cursor(cursor_factory=RealDictCursor) as cur:
+            cur.execute(sql.query_get)
+            record = cur.fetchall()
+            cur.close()
+            return record
 
     def close(self):
         self.conn.close()

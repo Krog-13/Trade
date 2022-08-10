@@ -16,7 +16,6 @@ def data_sheet():
         result = sheet.values().get(spreadsheetId=SAMPLE_SPREADSHEET_ID,
                                     range=SAMPLE_RANGE_NAME,
                                     majorDimension="ROWS").execute()
-        # pprint(result['values'])
         return result.get('values', [])
     except HttpError as err:
         logging.info(err)

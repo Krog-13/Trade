@@ -6,7 +6,11 @@ from config import TOKEN, chatID, logging
 
 def reformat_date(data, rate_us):
     """Datetime change format"""
-    data[3] = datetime.strptime(data[3], "%d.%m.%Y").date()
+    try:
+        data[3] = datetime.strptime(data[3], "%d.%m.%Y").date()
+    except (ValueError, IndexError):
+        logging.warning("Incorrect datetime format")
+        raise TypeError
     data.append(round(int(data[2])*rate_us,2))
     return data
 
@@ -26,6 +30,7 @@ def compare(new, old_r, rate_us):
 
 
 def cbr():
+    """Receive rate dollar to rus"""
     url = "https://www.cbr.ru/scripts/XML_daily.asp?date_req=07/08/2022"
     res = requests.get(url)
     root = ET.fromstring(res.text)
@@ -36,9 +41,11 @@ def cbr():
 
 
 def notification_tg(date):
+    """Send notification in tg
+    if delivery time has passed"""
     now = datetime.now().date()
     note = "Срок поставки прошел"
-    if date < now:
+    if date > now:
         return
     logging.info("Send notification")
     send_text = 'https://api.telegram.org/bot' + TOKEN + \
@@ -48,12 +55,7 @@ def notification_tg(date):
     requests.get(send_text)
     # return response.json()
 
-
-
 if __name__ == '__main__':
-    date = datetime(2022,7,30).date()
-    row = ['11','12497899', '617', '30.07.2022']
-    old = [11, 12497899, 617, date, 64000]
-    res = compare(row,old, 60)
-    print(res)
-
+    res = ['11', '12345', '456']
+    res1 = ['11', '12345', '456']
+    compare(res, res1, 50)

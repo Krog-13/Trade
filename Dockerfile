@@ -8,4 +8,7 @@ COPY .env .env
 RUN python -m venv venv
 RUN venv/bin/pip install -r requirements.txt
 COPY src src
-CMD ["venv/bin/python", "main.py"]
+COPY web web
+EXPOSE 5000
+ENTRYPOINT [ "venv/bin/python" ]
+CMD [ "main.py" ]

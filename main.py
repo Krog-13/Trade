@@ -5,10 +5,13 @@ from src.recast import manipulation_sheets
 import schedule
 from src.utils import cbr
 from config import logging
+from web import create_app
+import threading
 
 # initialisations
 db = Database()
 RATE_US = cbr()
+app = create_app()
 
 
 # us to rus exchange rate
@@ -36,6 +39,7 @@ schedule.every().day.at("00:00").do(rate)
 schedule.every(1).minutes.do(start)
 
 
+# Sheet task
 def main():
     logging.info("Loop starting...")
     while True:
@@ -43,5 +47,13 @@ def main():
         time.sleep(1)
 
 
+# Flask app
+def run_app():
+    app.run(host='0.0.0.0')
+
+
 if __name__ == '__main__':
-    main()
+    flask_thread = threading.Thread(target=run_app)
+    api_thread = threading.Thread(target=main, daemon=True)
+    flask_thread.start()
+    api_thread.start()

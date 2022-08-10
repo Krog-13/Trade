@@ -76,9 +76,3 @@ class Database:
 
     def close(self):
         self.conn.close()
-
-if __name__ == '__main__':
-    db = Database()
-    res = db.check_exists(vars=(1,))
-    res1 = db.check_exists(vars=(1,))
-    # print(res)

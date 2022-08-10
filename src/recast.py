@@ -21,7 +21,7 @@ def manipulation_sheets(db, sheet, rate_us):
         else:
             try:
                 data = utils.reformat_date(row, rate_us)
-            except TypeError:
+            except (TypeError, ValueError):
                 continue
             # send notification
             utils.notification_tg(row[3])

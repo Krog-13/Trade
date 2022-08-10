@@ -7,7 +7,7 @@ Set scheduling for api have 1 min for update
 
 In _config_ need to write your telegram-chatID,
 and find bot @Gashanbot to which the notification will be sent
-
+link google sheets - https://docs.google.com/spreadsheets/d/12XUt8fPdoWSCGbsDBaeTnurMZPFB_0Ju_GH_D4Lk13k/edit?usp=sharing
 ---
 > Run app 
 

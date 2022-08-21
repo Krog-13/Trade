@@ -19,8 +19,3 @@ def data_sheet():
         return result.get('values', [])
     except HttpError as err:
         logging.info(err)
-
-
-
-if __name__ == '__main__':
-    data_sheet()

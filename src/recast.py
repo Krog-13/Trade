@@ -5,7 +5,7 @@ from config import logging
 def manipulation_sheets(db, sheet, rate_us):
     """Sheet: excel data
     Updating, adding data's sheet"""
-    count = [0,0]
+    count = [0, 0]
     for row in sheet[1:]:
         old_row = db.check_exists(vars=(row[0],))
         if old_row:
